@@ -1,0 +1,80 @@
+# Statistical Power {#power}
+
+## What is statistical power?
+
+```{r}
+#Set a range of x values
+x.values <- seq(-4,4,0.01)
+
+#Plot a  distribution of t values with 3 degrees of freedom for the corresponding x values
+plot(x.values,dt(x.values, 3), type="l", lty=1, lwd=2, ylim=c(0,0.4), xlab="t", ylab="probability", xlim=c(-4,10))
+
+#add lines that define the 5% critical values for the t distribution with 3 degrees of freedom
+abline(v=qt(c(0.025,0.975),3), col="black")
+
+#Plot a  distribution of t values with 3 degrees of freedom for the corresponding x values in which the true difference is 5
+lines(x.values+5,dt(x.values, 3), type="l", lty=2, lwd=2)
+
+#Effect of a greater magnitude of difference
+#Plot a  distribution of t values with 3 degrees of freedom for the corresponding x values
+plot(x.values,dt(x.values, 3), type="l", lty=1, lwd=2, ylim=c(0,0.4), xlab="t", ylab="probability", xlim=c(-4,10))
+
+#add lines that define the 5% critical values for the t distribution with 3 degrees of freedom
+abline(v=qt(c(0.025,0.975),3), col="black")
+
+#increase the difference between the means from 0 to 7
+lines(x.values+7,dt(x.values, 3), type="l", lty=4, lwd=2)
+
+#Effect of a bigger sample size
+#Plot a  distribution of t values with 3 degrees of freedom for the corresponding x values
+plot(x.values,dt(x.values, 30), type="l", lty=1, lwd=2, ylim=c(0,0.4), xlab="t", ylab="probability", xlim=c(-4,10))
+
+#add lines that define the 5% critical values for the t distribution with 3 degrees of freedom
+abline(v=qt(c(0.025,0.975),30), col="black")
+
+#Plot a  distribution of t values with 3 degrees of freedom for the corresponding x values
+lines(x.values+5,dt(x.values, 30), type="l", lty=6, lwd=2)
+
+#Effect of a bigger sample size but more stringent alpha
+#Plot a  distribution of t values with 3 degrees of freedom for the corresponding x values
+plot(x.values,dt(x.values, 30), type="l", lty=1, lwd=2, ylim=c(0,0.4), xlab="t", ylab="probability", xlim=c(-4,10))
+
+#add lines that define the 5% critical values for the t distribution with 3 degrees of freedom
+abline(v=qt(c(0.005,0.995),30), col="black")
+
+#Plot a  distribution of t values with 3 degrees of freedom for the corresponding x values
+lines(x.values+5,dt(x.values, 30), type="l", lty=6, lwd=2)
+
+```
+
+## Performing Power Analysis
+
+Required sample size for measuring a mean with a desired precision. a function to compute the required sample size for estimating a mean with a specified precision that requires a standard deviation, a half-width interval and a maximum sample size  
+
+```{r}
+my.pwr.test <- function(my.sd,my.d,max.n){
+  n.range <- matrix(nrow=max.n, ncol=2, dimnames = as.list(c(),c("n.guess", "n.val")))
+  for(i in 3:max.n) {
+  n.range[i,1] <- i
+  n.range[i,2] <- ((my.sd)^2*qt(0.975,i-1)^2)/my.d^2
+  }
+
+print(n.range)
+
+#the minimum on this plot is the point of convergence for the iterative calculation
+#it defines the minimal sample size required to measure the mean with the specified precision
+plot(-1*log10(abs(n.range[,1]-n.range[,2])))
+abline(v=which.min(abs(n.range[,1]-n.range[,2])), lty=2, lwd=3, col=2)
+
+#print out the minimum sample size required  
+print("minimum sample size required:")
+print(which.min(abs(n.range[,1]-n.range[,2])))
+
+}
+
+#example
+my.pwr.test(30,10,40)
+
+```
+
+

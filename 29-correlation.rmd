@@ -1,0 +1,92 @@
+# Covariance and correlation {#cor}
+
+## Covariance
+
+```{r}
+#generate matrix of twin IQs then turn it into a dataframe
+twins <- matrix(data = c(100,125,97,92,86,110,118,90,104,89), ncol=2, dimnames= list(c("A","B","C","D","E"),c("twin1","twin2")))
+twins <- data.frame(twins)
+attach(twins)
+
+#calculate the variance within "twin1" and "twin2" and test whether they are additive
+var(twin1)
+var(twin2)
+var(twin1)+var(twin2)
+var(c(twin1,twin2))
+
+#calculate the covariance within the twin dataset
+cov(twin1,twin2)
+
+#calculate the heritability of IQ based on the twin study
+cov(twin1,twin2)/var(c(twin1,twin2))
+
+#plot covariance between twin 1 and twin 2
+plot(twin1,twin2, xlim=c(75,130), ylim=c(75,130), lwd=3)
+abline(v=mean(twin1), lty=2, lwd=2)
+abline(h=mean(twin2), lty=2, lwd=2)
+```
+
+## Correlation
+
+```{r}
+#calculate the linear correlation coefficient
+cor(twin1,twin2)
+
+#perform a test for significance
+cor.test(twin1,twin2)
+```
+
+## Generaing simulated datasets
+
+```{r}
+#you need to load the MASS library
+library(MASS)
+
+#the function mvrnorm generates a matrix in which you need to specify the mean, variance and covariance
+xy <- mvrnorm(1000,mu=c(50,60),matrix(c(4.3,3.7,3.7,7.9),2))
+var(xy)
+
+x <- xy[,1]
+y <- xy[,2]
+plot(x,y, ylab="y", xlab="x", pch=16)
+
+var(x)
+var(y)
+
+#if you provide 2 vectors to var() you get the covariance
+var(x,y)
+#the correlation coefficient is the covariance divided by the geometric mean of the individual variances
+var(x,y)/sqrt(var(x)*var(y))
+#correlation can be calculated using the function cor
+cor(x,y)
+cor.test(x,y)
+
+###########################################
+#generate a martix of uncorrelated values##
+###########################################
+wz <- mvrnorm(1000,mu=c(50,60),matrix(c(4.3,0,0,7.9),2))
+var(wz)
+
+w <- wz[,1]
+z <- wz[,2]
+plot(w,z, ylab="w", xlab="z", pch=16)
+
+var(w)
+var(z)
+
+#if you provide 2 vectors to var() you get the covariance
+var(w,z)
+#the correlation coefficient is the covariance divided by the geometric mean of the individual variances
+var(w,z)/sqrt(var(w)*var(z))
+#correlation can be calculated using the function cor
+cor(w,z)
+cor.test(w,z)
+
+```
+
+
+
+
+
+
+

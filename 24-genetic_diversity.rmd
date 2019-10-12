@@ -1,0 +1,3 @@
+# Genetic Diversity {#diversity}
+
+In this chapter we will look at different ways of defining genetic diversity.

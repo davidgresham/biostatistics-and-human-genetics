@@ -1,0 +1,38 @@
+# Mendel's Model {#mendel_model}
+
+On the basis of the experiments and data collected by Mendel, he proposed a model for how traits are inherited in pea plants.
+
+## Mendel's first law
+
+Mendel’s first law or the _law of equal segregation_ states: when a gamete is formed the members of a gene pair (alleles) separate so that each gamete receives only one copy.
+
+## Mendel's second law
+
+Mendel’s second law or, the __principle of independent assortment__ states: different gene pairs assort independently in gamete formation
+
+The key to understanding the relationship between the inheritance of discrete factors and the phenotypes is an understanding of chance, or probability.
+
+##  Probability
+
+The __probability__ of a particular outcome may be considered equivalent to the number of times an outcome is expected to occur over a large number of repeated trials.  When expressed as a ratio this is equivalent to the probability that the particular outcome will occur in a single trial.
+
+### Additive Law of Probability
+
+Prob(A __or__ B) = Prob(A) + Prob(B)
+
+The probability of the realization of one or the other of two mutually exclusive possibilities, A or B, is the sum of their separate probabilities.
+
+
+### Multiplicative Law of Probability
+
+Prob(A __and__ B) = Prob(A) x Prob(B)
+
+The probability of two independent possibilities, A and B, being realized simultaneously is given by the product of their separate probabilities
+
+
+
+
+
+
+
+

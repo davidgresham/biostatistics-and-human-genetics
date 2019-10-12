@@ -1,0 +1,97 @@
+# Linear Regression {#lm}
+
+## Linear Regression in R
+
+```{r}
+#you need to load the MASS library
+library(MASS)
+
+#the function mvrnorm generates a matrix in which you need to specify the mean, variance and covariance
+xy <- mvrnorm(10,mu=c(180,180),matrix(c(100,85,85,100),2))
+var(xy)
+x <- xy[,1]
+y <- xy[,2]
+
+#plot the scatter points and add the line of least squares
+plot(x,y, pch=16, xlab="mid-parental height (cm)", ylab="child's height (cm)")
+abline(lm(y~x), col="red", lwd=4)
+
+#add lines depicting the residuals
+fitted <- predict(lm(y~x))
+for(i in 1:10) {lines(c(x[i],x[i]),c(y[i],fitted[i]))}
+
+#display a summary of the linear regression analysis
+print(summary(lm(y~x)))
+
+
+```
+
+
+```{r}
+#you need to load the MASS library to use the mvrnorm() function
+library(MASS)
+
+#generate some simulated data
+#the function mvrnorm generates a matrix in which you need to specify the mean, variance and covariance
+#Note that when you run this it generates random data so it will not look like what I showed in class.
+xy <- mvrnorm(10,mu=c(180,180),matrix(c(100,85,85,100),2))
+var(xy)
+x <- xy[,1]
+y <- xy[,2]
+
+#plot the scatter points 
+plot(x,y, pch=16, xlab="mid-parental height (cm)", ylab="child's height (cm)")
+
+#to perform linear regression of x against y using least squares we use the ~ symbol
+lm(y~x)
+
+#however, this doesn't get us a very informative output, so we use summary()
+#which gives us the slope and intercept as well as the t-test and the ANOVA
+summary(lm(y~x))
+
+#we can save the output of lm as a variable
+linear.model <- lm(y~x) 
+
+#this saves it as a lm object
+class(linear.model)
+
+#and then we can run the function confint() which returns the 95% confidence interval for the two parameters (intercept in the first row and slope in the second row).
+confint(linear.model)
+
+#we can now predict a y value (i.e. a child's height) based on an x value (the mid-parental height) using the linear model.  The first argument is the model and the second argument is the value of x.  Note that we have to specify it in list form.
+predict(linear.model, list(x=180))
+
+#we can predict values for a range of values
+predict(linear.model, list(x=c(174,180,185,190)))
+
+#To add a line to the plot that shows that linear model:
+abline(linear.model, col="red", lwd=4)
+
+#This also works, and is what I typically do:
+abline(lm(y~x), col="red", lwd=4)
+
+#If we use predict() we get the values of y from the model for each of the values of x that were used to fit the model
+predict(lm(y~x))
+#or
+predict(linear.model)
+
+#This little bit of code will add lines depicting the residuals
+fitted <- predict(lm(y~x))
+for(i in 1:10) {lines(c(x[i],x[i]),c(y[i],fitted[i]))}
+
+
+```
+
+
+## Diagnostics
+
+Often we want to run some diagnostics on the model to assess whether our assumptions are justified e.g. whether the residuals are normally distributed or whether there are specific points that have undue influence on the model.
+In R there are inbuilt functions to do this.  Simply use plot(lm(y~x)).  This will give you four different plots with diagnostics
+
+```{r}
+plot(lm(y~x))
+#or because we saved our model as a variable we can use:
+plot(linear.model)
+```
+
+

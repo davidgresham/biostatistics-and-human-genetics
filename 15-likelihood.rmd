@@ -1,0 +1,52 @@
+# Likelihood {#likelihood}
+
+Let's study the log-likelihood profiles as a function of $p$ for samples sizes of 10,100 and 1000.                 
+
+```{r}
+#set a range of recombination probabilities (ranging from 0 to 0.5) for which we want to calculate the likelihood
+r <- seq(0, 0.5, by=0.01)
+
+#define a matrix in which we will keep track of likelihood values as a function of probability
+l <- matrix(data=NA, nrow=length(r), ncol=2, byrow=TRUE, dimnames=list(c(),c("p","log-likelihood")))
+
+#make a loop to step through the likelihood calculation for each value of the parameter p
+for(i in 1:length(r)) { 
+
+print("...", quote=FALSE)
+print(paste("step ",i," of loop. Things look good.", sep=""))
+
+#define probability for each step in the loop
+p <- r[i]
+
+#print some output each time we go thorugh the loop to tell us the current computation
+print(paste("computing likelihood for p =", p, sep=" "))
+
+#write down the likelihood function and assign it to a variable
+#to caluculate the log.likelihood for 10x the data change: 10=>100, 2=>20, 8=>80
+#to caluculate the log.likelihood for 100x the data change: 10=>1000, 2=>200, 8=>800
+log.likelihood <- log(choose(10,2)) + 2*log(p) + 8*log(1-p)
+
+#print the likelihood to the terminal so we can see it in real time
+print(paste("log-likelihood", log.likelihood, sep=" "))
+
+#record probability and log-likelihood value
+l[i,] <- c(p,log.likelihood)
+
+if(i==51) {print(paste("...","exiting loop","...", sep=" "))}
+
+}
+
+#identify the maximum log-likelihood value
+l.max <- max(l[,2])
+
+#determine the value of p that results in the maximum likelihood.  This is the maximum likelihood estimation of p.
+p.max <- l[l[,2]==l.max,1]
+
+#plot the log-likelihood for all p
+plot(l[,1],l[,2],lwd=3,col=2, xlab="recombination fraction", ylab="log-likelihood", type="l")
+
+#indicate where the maximum likelihood lies
+abline(v=p.max)
+```
+
+

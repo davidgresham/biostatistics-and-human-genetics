@@ -1,0 +1,37 @@
+# (PART) Part II: Mendelian Genetics {-} 
+
+# The distribution of human phenotypes 
+
+We can think of human phenotypes as comprising two classes:
+
+* Binary traits
+* Continuous traits
+
+## Human Phenotypes
+
+### Binary traits
+
+Binary traits are human phenotypes that are either/or scenarios.    Many inherited diseases are binary traits: a child is either born affected by a disease of unaffected by a disease.  
+
+Not all binary traits are diseases.  Examples of non-disease binary traits include sex: humans are born either male or female.
+
+### Continuous traits
+
+The vast majority of human traits are continuous traits - phenotypes can take on any value (typically within some range).  If we think of easily observed human phenotypes such as height, weight and skin color individuals exist along a continuum of phenotypic values.  
+
+Human beings have a tendency towards classification that imposes binary distinctions on continuous traits.  For example, people are classified as being either tall or short, heavy of slender, and pale or dark-skinned.  The reality is that these classifications are often arbitrary and therefore of little scientific value.  
+
+#### Threshold traits
+
+Many human diseases can be considered as threshold traits.  There is a continuum of possible values for blood pressure, body mass index, personality traits, but at some point on this continuum a "normal" phenotype is deemed to be a "disease"
+
+## The genetics of human phenotypes
+
+Understanding the basis of inherited human phenotypes has been one of the great scientific efforts of the last 150 years.   In the following chapters we will explore how diverse studies in _non-human_ organisms including peas and fruitflies led to breakthroughs in our understanding of human inheritance.  
+
+We will initially focus on how heritable factors  are inherited in familes.  This is callled _transmission genetics_ as our focus is on how inheritance works in familes.
+
+A key point is that despite the enormous advances in our understanding of human inheritance there is much that we still do not comprehend.
+
+
+

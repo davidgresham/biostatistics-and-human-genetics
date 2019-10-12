@@ -1,0 +1,22 @@
+# (PART) Statistics and Programming {-} 
+
+# Why we use statistics
+
+As described in the [introduction](#intro) the goal of this book is to integrate genetics, statistics and programming.
+
+Statistics provide serve two complementary purposes.  We can use them to:
+
+* provide summaries of data 
+* make inferences from data
+
+In the context of human heredity these two purposes are used all the time.  For example, 
+
+* provide summaries of data
+   + determine the mean level of expression of a gene
+   + determine the distribution of normal body weights
+
+* make inferences from data
+  + test whether patients who take a drug differ from those who don't
+  + test whether a specific variant is associated with a disease
+  
+In this book, we will look at using statistics for both summarizing data and making inferences based on a sample from a population.

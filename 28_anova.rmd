@@ -1,0 +1,60 @@
+# ANOVA: analysis of variance 
+to perform the analysis of variance performed in class you need to load the lecture19.Rdata file
+
+```{r}
+load("files/lecture19.Rdata")
+attach(bw.data)
+```
+
+## Performing ANOVA in R
+
+```{r}
+#use aov() to perform ANOVA
+aov(bw~genotype)
+
+#wrap it in summary() to get a nicer output
+summary(aov(bw~genotype))
+```
+
+
+```{r}
+#plot bw data as a simple dot plot
+plot(c(bw[1:5], bw[11:15], bw[6:10]), pch=1, lwd=3, col=c(2,2,2,2,2,4,4,4,4,4,1,1,1,1,1), ylim=c(2800,4100), xlab="", ylab="Birthweight (g)", xaxt='n', ann=FALSE)
+
+
+par(mfrow = c(1,3))
+#plot bw data as a simple dot plot 
+plot(c(bw[1:5], bw[11:15], bw[6:10]), pch=20, lwd=1, col=c(2,2,2,2,2,4,4,4,4,4,1,1,1,1,1), ylim=c(2800,4100), xlab="", ylab="Birthweight (g)", xaxt='n', ann=FALSE, cex.axis=1.5, cex=2)
+plot(c(bw[1:5], bw[11:15], bw[6:10]), pch=20, lwd=1, col=c(2,2,2,2,2,4,4,4,4,4,1,1,1,1,1), ylim=c(2800,4100), xlab="", ylab="Birthweight (g)", xaxt='n', ann=FALSE, cex.axis=1.5, cex=2)
+plot(c(bw[1:5], bw[11:15], bw[6:10]), pch=20, lwd=1, col=c(2,2,2,2,2,4,4,4,4,4,1,1,1,1,1), ylim=c(2800,4100), xlab="", ylab="Birthweight (g)", xaxt='n', ann=FALSE, cex.axis=1.5, cex=2)
+```
+
+
+## The F distribution
+
+```{r}
+par(mfrow=c(1,2))
+
+#Plot an F distribution
+nd <- seq(0,7,0.1)
+y <- df(nd,2,20)
+plot(nd,y,type="l", xlab="F", ylab="probability", ylim=c(0,1))
+
+y <- df(nd,4,20)
+plot(nd,y,type="l", xlab="F", ylab="probability", ylim=c(0,1))
+
+y <- df(nd,6,20)
+plot(nd,y,type="l", xlab="F", ylab="probability", ylim=c(0,1))
+
+y <- df(nd,1,20)
+plot(nd,y,type="l", xlab="F", ylab="probability", ylim=c(0,1))
+
+y <- df(nd,100,1000)
+plot(nd,y,type="l", xlab="F", ylab="probability")
+```
+
+
+
+
+
+

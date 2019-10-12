@@ -1,0 +1,144 @@
+# Summary statistics {#summary-stats}
+
+One of the most common uses of statistics is to provide a summary of some set of data.  We can summarize datasets by describing specific properties.  Let's consider some of the basic summary statistics.
+
+First let's consider some data.  The following table is a frequency table of GPAs among 23 students.
+
+```{r, include=FALSE}
+gpa <- matrix(c(3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4,5,10,0,0,1,2,1), nrow=8, ncol=2,dimnames = list(c(), c("GPA", "Frequency")))
+
+```
+
+```{r, gpatable, echo=FALSE}
+knitr::kable(
+  gpa,
+  caption = "Frequency of GPA (n = 23)"
+)
+```
+
+This table summarizes the 23 values in the sample. However, it is not a very useful format for performing calculations in R.  Instead, we will consider all the data by putting it in the following format:
+
+```{r}
+gpa.sample <- c(rep(3.3,4), rep(3.4,5), rep(3.5, 10), rep(3.6, 0), rep(3.7, 0), rep(3.8, 1), rep(3.9, 2), rep(4.0, 1))
+
+gpa.sample
+```
+
+
+## Central tendency
+
+There are three ways of defining the _central tendency_ of the data.  They are:
+
+* mean
+* median
+* mode
+
+### Mean
+
+The mean is the sum of all values divided by the number of individuals.
+
+$\overline {x}=\sum _{i=1}^{n}\dfrac {x_{i}} {n}$
+
+All this equation means is that we add up all the values and divide by the total number of values.  In this case, that's:
+
+```{r}
+sum <- ((4 * 3.3) + (5 * 3.4) + (10 * 3.5) + (0 * 3.7) + (1 * 3.8) + (2 * 3.9) + (1 * 4.0))
+sum
+average.gpa <- sum / 23
+average.gpa
+```
+
+### Median
+
+The median is the middle value when all values are arranged in increasing order.  For $n$ values, the median value is:
+
+* if $n$ is _odd_, the median value is the $(n+1)/2$ position
+* if $n$ is _even_, the median value is the average of the $n/2$ and $(n+1)/2$ positions 
+
+In our sample of 23 individuals (an _odd_ number) the median value is the value at position $(23+1)/2 = 12$, which makes it 3.5.
+
+Luckily, we can easily calculate that in R.
+
+```{r}
+median(gpa.sample)
+```
+
+###Mode
+
+The __mode__ is the most common value in set of data. There is no formula for calculating that.  We can easily see from the frequency table that the most frequent value, or the mode, is: $3.5$
+
+R doesn't have a function for determining the mode.  In practice, the mode is not used very often as a summary statistic.
+
+## Variability 
+
+In addition to sumamrizing the _central tendency_ of the data, we often want to descrive the variability in the data, or the _spread_.  Different data can have the same central tendency, but very different amounts of variability.
+
+### Variance
+
+A useful measure of the variability in the data is the _variance_.  In order to measure the variance in a sample we:
+
+* measure the distance of each value from the mean
+* determine the average distance of all values from the mean 
+
+The problem is that some values are greater than the mean, so this difference will be positive, and some values are less than the mean, so this difference will be negative.
+The solution is to take the _square_ of the difference.  As the square of both positive and negative numbers is positive these measures of difference from the mean will all be positive.
+
+The formula for the variance is:
+
+$s ^{2}=\dfrac {\sum _{i=1}^{n}\left( x_{i}-\overline {x}\right) ^{2}} {n-1}$
+
+The numerator of this equation, $\sum _{i=1}^{n}\left( x_{i}-\overline {x}\right) ^{2}$, is called the _sum of squares_
+
+The denominator of this equation, ${n-1}$,  is called the _degrees of freedom_ (more about that later).
+
+So, the _variance_ can be considered the average of the _sum of squares_.
+
+For our data, the variance is:
+
+```{r}
+squared.diff <- (gpa.sample - mean(gpa.sample))^2
+squared.diff
+
+sum.of.squares <- sum(squared.diff)
+sum.of.squares
+
+degrees.of.freedom <- 23 - 1
+
+sample.variance <- sum.of.squares / degrees.of.freedom
+sample.variance
+```
+
+which, thankfully we can compute in R using the function `var()`:
+
+```{r}
+var(gpa.sample)
+```
+
+
+### Standard deviation
+
+The problem with using _variance_ as the measure of variability in the data is that the units of are different from the data as it is the average of the _squared_ differences.  The simple solution is to take the square root of the variance, which we define as the __standard deviation__.
+
+The formula for the standard deviation is:
+
+$S =\sqrt {\dfrac {\sum _{i=1}^{n}\left( x_{i}-\overline {x}\right) ^{2}} {n-1}}$
+
+We can determine the standard deviation for our data by taking the square root of the variance using the R function `sqrt()`.
+
+```{r}
+sqrt(sample.variance)
+```
+
+or, more easily, we can use the R function `sd()`.
+
+```{r}
+sd(gpa.sample)
+```
+
+## Degrees of freedom
+
+The number of degrees of freedom is literally the number of ways that our data is free.  When we estimate a parameter from the data, like the _mean_, our data has become constrained and has lost a degree of freedom.
+
+To illustrate this, consider our 23 values, which we have estimated to have a mean of `r mean(gpa.sample)`.
+
+

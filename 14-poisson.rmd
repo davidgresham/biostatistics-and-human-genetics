@@ -1,0 +1,3 @@
+# The poisson distribution {#poisson}
+
+The poisson distribution...

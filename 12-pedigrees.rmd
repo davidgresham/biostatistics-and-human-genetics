@@ -1,0 +1,5 @@
+# Pedigree analysis {#pedigrees}
+
+## Human Pedigrees
+
+## Drawing pedigrees in R

@@ -1,0 +1,109 @@
+# Nonparametric methods {#nonparametric}
+
+## The sign test.
+
+The non-parametric alternative to the one sample or paired t-test 
+
+```{r}
+before <- c(5,100,2000,20,1000)
+after <- c(8,98,2200,16,900)
+
+#a paired t-test returns the following result
+t.test(before,after, paired=T, equal.var=T)
+
+#We can implement a sign test ourselves by:
+#1. calculate the difference 
+diff <- after-before
+#2 count how many are +ve (greater than zero)
+sum(diff>0) #there are two + values of 5 total
+#Compute the probability of getting two or less values greater than zero from 5 "trials" (one side) or two or less values less than zero from 5 "trials" if the null hypothesis is true (i.e. eqal probability of getting + or - ; p=0.5).
+binom.test(2,5,0.5, alternative="two.sided") #p-value=1 
+```
+
+## Performing sign tests in R
+
+Alternatively, the wilcox.test() function performs a paired sample test of the Wilcoxon signed rank test of the null that the distribution of x - y (in the paired two sample case) is symmetric about mu.
+
+```{r}
+wilcox.test(before,after, paired=T) #also returns a p-value of 1
+```
+
+
+## A more interesting example.  
+
+Generating two random samples or 300 values fron uniform distributions that differ slightly
+
+```{r}
+set.seed(1)
+before1 <- runif(300, min=-0.5,max=0.5)
+set.seed(2)
+after1 <- runif(300,min=-0.45,max=0.55)
+
+diff1 <- after1-before1
+sum(diff1<0) #number of values out of 300 that are below zero (-ve)
+binom.test(sum(diff1<0),300,0.5, alternative="two.sided") #binomial test 
+
+
+wilcox.test(before1,after1, paired=T) #p-value is not 1
+t.test(before1,after1, paired=T) #compare result with the parametric t test.
+
+```
+
+## The Mann-Whitney test.
+
+An alternative to two sample t-test
+
+```{r}
+
+sample1 <- c(1.5,5,20,30)
+sample2 <- c(2.5,4,19,29,32)
+
+wilcox.test(sample2,sample1)
+```
+
+
+A more interesting example.  generating two random samples or 300 values fron uniform distributions that differ slightly
+
+```{r}
+set.seed(3)
+sample3 <- runif(300, min=-5,max=5)
+set.seed(4)
+sample4 <- runif(300,min=-4.5,max=5.5)
+
+#the samples are not very normal
+hist(sample3)
+hist(sample4)
+
+#let's check the means
+mean(sample3)
+mean(sample4)
+
+wilcox.test(sample3,sample4, paired=F) #p-value is not 1
+t.test(sample3,sample4) #compare result with the parametric t test
+```
+
+## Spearman (rank) correlation
+
+```{r}
+tumor.grade <- c(1,2,2,3,3,4,5,5)
+gene.expression <- c(20,20,30,40,50,40,40,50)
+
+cor.test(tumor.grade,gene.expression) #pearson linear correlation by default
+
+cor.test(tumor.grade,gene.expression, method="spearman") #pearson linear correlation by default
+```
+
+### Comparing spearman and pearson correlation 
+
+Will often look similar,  but for the example below they differ
+
+```{r}
+
+data1 <- 1:20
+data2 <- 1/data1
+plot(data1,data2)
+
+cor.test(data1,data2,method="pearson") # = -0.707623
+cor.test(data1,data2,method="spearman") # = -1
+```
+

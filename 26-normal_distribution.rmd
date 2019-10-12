@@ -1,0 +1,56 @@
+# The normal distribution {#normal}
+
+In this chapter we will look at the normal distribution.
+
+#Let's read in birthweight dataset and determine mean and standard deviation
+#
+#```{r}
+#BirthWeight <- read.delim("files/BirthWeight.txt", quote="")
+#bw.mean <- mean(BirthWeight$Weight)
+#bw.sd <- sd(BirthWeight$Weight)
+#```
+
+<!-- Now let's plot a Histogram of the 53435 birthweights. -->
+<!-- ```{r} -->
+<!-- hist(BirthWeight$Weight, breaks=seq(0,6500,250), col="red") -->
+<!-- ``` -->
+
+<!-- Now let's plot a Histogram of the 53435 birthweights.Superimpose a plot of the corresponding normal distribution. Beacuse the probability density sums to 1 we need to multiply each probability density by the bin size from the histogram (i.e. 250) and the total sample size 53435 -->
+
+<!-- ```{r} -->
+<!-- hist(BirthWeight$Weight, breaks=seq(0,6500,250), col="red") -->
+<!-- xv <- seq(312,6492,10) -->
+<!-- yv <- dnorm(xv,mean=3083,sd=548)*53435*250 -->
+<!-- lines(xv,yv, lwd=6) -->
+<!-- ``` -->
+
+<!-- Plot a standard normal curve and draw a polygon for the for the area from -4..-2 under the normal distribution.  Let's add lines indicating the boundaries of 95% of the data -->
+
+<!-- ```{r} -->
+<!-- nd <- seq(-3.5,3.5,0.1) -->
+<!-- y <- dnorm(nd) -->
+<!-- plot(nd,y,type="l") -->
+<!-- xvals <- seq(-4,-2,length=50) -->
+<!-- dvals <- dnorm(xvals) -->
+<!-- polygon(c(xvals,rev(xvals)),c(rep(0,50),rev(dvals)), col=5) -->
+<!-- abline(v=qnorm(c(0.025,0.975))) -->
+<!-- ``` -->
+
+<!-- Plot a quantile-quantile plot of the birthweight data and add a line -->
+
+<!-- ```{r} -->
+<!-- qqnorm(BirthWeight$Weight) -->
+<!-- qqline(BirthWeight$Weight, lty=2) -->
+<!-- abline(h=mean(BirthWeight$Weight)) -->
+<!-- abline(v=0) -->
+<!-- abline(v=c(-1,1)) -->
+<!-- abline(h=c(mean(BirthWeight$Weight)+sd(BirthWeight$Weight),mean(BirthWeight$Weight)-sd(BirthWeight$Weight) )) -->
+<!-- abline(v=c(-2,2)) -->
+<!-- abline(h=c(mean(BirthWeight$Weight)+2*sd(BirthWeight$Weight),mean(BirthWeight$Weight)-2*sd(BirthWeight$Weight) )) -->
+<!--   abline(v=c(-3,3)) -->
+<!--   abline(h=c(mean(BirthWeight$Weight)+3*sd(BirthWeight$Weight),mean(BirthWeight$Weight)-3*sd(BirthWeight$Weight) )) -->
+<!-- ``` -->
+
+
+
+

@@ -1,0 +1,64 @@
+# The Winner's Curse {#winners}
+
+
+## Simulating the winners curse when using a t-test
+
+```{r}
+
+
+#Imagine that we have two populations that differ by 20%.
+
+pop1 <- rnorm(10000,mean=1,sd=1) 
+pop2 <- rnorm(10000,mean=1.2,sd=1) #the true difference in the means is 20% (1 versus 1.2)
+
+#plot a histogram of these two populations and their means
+plot(density(pop1))
+xy <- seq(-4,5,by=0.01)
+plot(xy,dnorm(xy,mean=1,sd=1))
+abline(v=mean(pop1))
+abline(v=mean(pop1)-sd(pop1), lty=2)
+abline(v=mean(pop1)+sd(pop1), lty=2)
+
+points(xy,dnorm(xy,mean=1.2,sd=1), col="blue")
+abline(v=mean(pop2), col="blue")
+abline(v=mean(pop2)-sd(pop1), lty=2, col="blue")
+abline(v=mean(pop2)+sd(pop1), lty=2, col="blue")
+
+#consider that we take a sample from each population of a specified size
+#we can vary this to see the effect of sample size
+sample.size <- 3
+
+#If we did a t-test from a random sample drawn from population 1 and population 2 using a sample size of 3 we are underpowered to detect a difference and so won't usually get a p value < 0.05. 
+t.test(sample(pop1,sample.size),sample(pop2,sample.size)) #if you repeat this you will typically get a non-significant result
+
+#let's repeat this 1,000 times and see how often we get a significant results
+
+results <-matrix(data=NA, nrow=1000,ncol=3,dimname=list(c(),c("effect size","p.val","t stat")))
+
+for(i in 1:1000){
+  sample1 <- sample(pop1,sample.size) 
+  sample2 <- sample(pop2,sample.size)
+  
+  results[i,1] <- mean(sample1)-mean(sample2)
+  results[i,2] <- t.test(sample1,sample2)$p.value
+  results[i,3] <- t.test(sample1,sample2)$statistic
+  
+}
+
+#most tests are non-signicant
+prop.non.sig <- dim(results[results[,2]>0.05,])[1]/dim(results)[1]
+print("proportion of significant results")
+print(1-prop.non.sig) #proportion of tests that are significant
+#let's plot the difference in the means for this estimates, the "effect size"
+
+plot(1:1000,sort(results[,1]), ylim=c(-4,4), main=paste("Estimated effect sizes (1000 simulations) for sample of size n=",sample.size,sep="")) #this is the effect size for all our estimates
+
+#add a line to indicate where the true population mean lies
+abline(h=mean(pop1)-mean(pop2), col="blue", lty=2) #the true effect size
+
+#let's look only at the tests that are significant at an alpha=0.05
+sig.results <- results[results[,2]<0.05,]
+points(sort(sig.results[,1]), col="red") #this is the effect sizes for the significant results.  Typically, for small sample sizes these effect sizes are going to overestimate the true effect size (i.e. a difference of -0.2 in this case )
+
+```
+

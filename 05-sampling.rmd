@@ -1,0 +1,141 @@
+# Sampling from populations {#sampling}
+
+## Sampling from populations
+
+In this chapter, our goal is to learn about the concept of sampling from a large population.  We can simulate this process in the computer to understand what is actually happening when we take a small sample from a large population and attempt to make an inference about the entire population.
+
+## Simulating a population of student heights
+
+We want to create a fictional population of heights in a population of students.  To do this, we just need to select two summary statistics that characterize a normal distribution - the average height and the standard devaition. We also need to define how many individuals are in our population.  So, let's choose some reasonable values:
+
+* average height = 170cm
+* standard deviation = 10cm
+* population size = 21,000 individuals
+
+Since we are going to simulate this population in R, we need to make those paramaters variables in R:
+
+```{r}
+ave.height <- 170
+sd.height <- 10
+pop.size <- 21000
+```
+
+The R function `rnorm()` will generate a simulated population for us with the specified parameters (mean and standard deviation). 
+
+You can learn about the function by typing `?rnorm` at the command prompt
+
+Now, we can generate our population by specifying those three parameters.
+
+```{r}
+pop.heights <- rnorm(pop.size, mean=ave.height, sd=sd.height)
+```
+
+### Generate a histogram that summarizes the distribution of heights in the entire population.
+
+We plot the distribution of heights in the entire population using the function `hist()`
+
+To help in visualization, let's also add a vertical line indicating the mean height and +/- 1 standard deviation using the function `abline()`
+
+```{r heights, echo=TRUE, fig.align = 'center', fig.cap="Population heights"}
+
+hist(pop.heights, br=100, main="Distribution of heights in student population", xlab="height (cm)")
+
+abline(v=mean(pop.heights), col="red", lwd=6, lty=2)
+abline(v=mean(pop.heights)+sd(pop.heights), col="blue", lwd=3, lty=2)
+abline(v=mean(pop.heights)-sd(pop.heights), col="blue", lwd=3, lty=2)
+```
+
+### Simulating the process of sampling from a large population.
+
+In the real world,we are typically not able to measure the heights of all individuals in a population.  Instead, a common approach is to take a _random sample_ from the population, and determine the summary statistics of this sample.  We then make an inference about the population on the basis of our sample.  For example, we can _estimate_ the average __population__ height and the __population__ standard deviation by _calculating_ the average height in the __sample__ and the standard deviation of the __sample__.  
+
+As we can see from the red line in \@ref(fig:heights) the average height in our simulated population is 170cm, which was a populaton parameter that we specified in simulating the population.  
+
+Now, we want to simulate the process of sampling from the population.  Let's imagine that we take a sample of 17 individuals. We can simulate the process of sampling 17 individuals from this population using the function `sample()`.
+
+```{r}
+sample1 <- sample(pop.heights, size=17)
+```
+
+Now let's plot the __FREQUENCY__ distributiion of our sample of 17 randomly chosen individuals from the population and add a line indicating the mean of our sample.
+
+```{r, sample1, fig.align = 'center', fig.cap="Sample 1 heights"}
+hist(sample1, main="Frequency distribution of human heights, n=17", xlab="height (cm)")
+abline(v=mean(sample1), col="red", lwd=6, lty=2)
+```
+
+```{r}
+paste("The average height in sample 1 of 17 individuals is: ", mean(sample1), sep=" ")
+```
+
+In most cases our __sample mean__ is going to differ from the __population mean__.   Therefore, we can think of our __sample mean as a random variable__.
+
+To illustrate the concept that the sample mean is a random variable, let's simulate taking a completely different sample of 17 individuals from our population of 20,000 individuals and look at the result.
+
+```{r, sample2, fig.align = 'center', fig.cap="Sample 2 heights"}
+sample2 <- sample(pop.heights, size=17)
+hist(sample1, main="Frequency distribution of human heights, n=17", xlab="height (cm)")
+abline(v=mean(sample1), col="red", lwd=6, lty=2)
+paste("The average height in sample 2 of 17 individuals is: ", mean(sample2), sep=" ")
+```
+
+## Repeating the process of sampling over and over
+
+By simulating the process of sampling from a population thousands of times we can obtain the ***distibrution of sample means***. All we need to do to determine the sampling distribution of means is repeat our sampling procedure 10,000 (or more) times and calculate the sample mean each time.
+
+R allows us to do this very easily using a concept in computer programming called a _loop_.
+
+A loop has two parts:
+
+1. We need to define _how many times we want to repeat_ something which we indicate with the synatx: `for(i in 1:10000)`
+2. We need to tell R _what to do each time_ we go through the loop.  We put this command in curly brackets: `{}`
+
+Often, we want to keep a record of what the result was each time we went through the loop.  To do that, we define a variable (a vector in this case) in which we can store the information generated in the loop.  Initially, the contents of the vector will be empty, which we can see by looking at the first 10 values. 
+
+```{r}
+sample.means <- numeric(10000)
+sample.means[1:10]
+```
+
+In the loop below I am 1) taking a sample from the population 2) calculating the mean of that sample and recording it.
+
+```{r loop}
+for(i in 1:10000) {
+this.sample <- sample(pop.heights,size=17)
+sample.means[i] <- mean(this.sample)  
+}
+```
+
+Now the variable sample.means should have information in it.  Let's look at the first ten values:
+
+```{r}
+sample.means[1:10]
+```
+
+Now let's plot the PROBABILITY distribution of SAMPLE MEANS and indicate the _mean of means_ with a read line.
+
+```{r, samplemeans, fig.align = 'center', fig.cap="Distribution of sample means"}
+hist(sample.means, main = "Probability of sample means, n=17", xlab="sample mean height (cm)", xlim=c(160,180))
+abline(v=mean(sample.means), col="red", lwd=6, lty=2)
+```
+
+This distribution is __distribution of sampling means__.  It is a probability distirbution that defines the chance of getting a specific sample mean value when we take a random sample from our population.
+
+Interestingly, you can see that the mean of the sample means is:
+
+```{r}
+mean(sample.means)
+```
+
+
+## Exercises
+1. Generate a fictional population of 100,000 blood pressure values for healthy females aged 30-50.  
+2. Construct a histogram with correct axis labels
+3. Simulate taking sample sizes of 10, 100 and 1000 from the population
+4. Make a three panel plot in which you plot the distubution of sample means.
+5. Bonus: determine the mean and standard deviation of each distribution.
+
+
+
+
+

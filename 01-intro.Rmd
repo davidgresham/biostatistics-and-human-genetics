@@ -1,0 +1,21 @@
+# New Intro
+
+Open any modern textbook in genetics and one will be hard-pressed to find any examples of the use of statistics. Increasingly, genetics has come to mean molecular genetics and most genetics text books will explain how transcription occurs or how proteins are produced, but not how to calculate the probability of having four unaffected children or how a LOD score is calculated. In general, one is lucky to find a reference to statistics relegated to a small box at the bottom of the page that might start “For those who are mathematically inclined…”. If there is reference to a statistical test that might be applied in the context of a problem in genetics it is often provided without any background in statistics with the assumption that the reader has already acquired that knowledge somewhere else (or is uninterested in understanding the statistical bases).
+
+The irony is that modern statistics was largely founded in the twentieth century by geneticists who were motivated by problems of human inheritance. Indeed, Galton, Pearson, and Fisher all made seminal contributions to both our understanding of inheritance and genes in populations as well as providing the foundation for all modern statistics. The revolution in molecular genetics during the twentieth century made it increasingly possible to make fundamental discoveries in genetics without any statistics at all. But, the advent of genomics has meant that once more a sound knowledge of statistics is critical for undertaking genetics and molecular biology.
+
+Whereas statistics previously entailed tedious calculations and leafing through the appendix of statistics textbooks to identify critical values, all statistics is now done with computers. Thus, computer programming has become the essential tool for executing statistical analyses. However, there is great value in working through problems using pencil and paper.
+
+The goal of this book is to provide a comprehensive introduction to genetics, statistics and computer programming. I have aimed to
+
+The guiding principles of this books are:
+
+motivating statistics with real problems in genetics and biology
+using simulation
+writing human readable computer coding
+working with pencil and paper to develop deep statistical intuition
+In order to realize these principles this book is written with:
+
+computer code embedded throughout the text
+practical exercises to be undertaken using R
+problems to be solved by hand

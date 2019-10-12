@@ -1,0 +1,87 @@
+# Mendelian inheritance in humans {#mendelian_human}
+
+A Mendelian character is one in which a particular genotype at one locus is both necessary and sufficient for the character to be expressed, given the normal range of human genetic and environmental backgrounds.
+
+Also referred to as “monogenic traits”
+
+## Five Basic Mendelian Patterns in Humans
+
+### Autosomal
+
+#### Autosomal dominant inheritance
+
+* Affected person has at least one affected parent
+* Daughters and sons equally affected
+* Transmitted by either sex
+* A mating between an affected and unaffected has a 50% chance of producing and affected offspring
+*	P(affected) = 0.5
+
+#### Autosomal recessive inheritance
+
+* Affected people born to unaffected parents
+* Parents are carriers (heterozygotes)
+* Male and female children both affected
+* Often associated with increased consanguinity (cousin marriage)
+* Two carriers have a  25% chance of having an affected offspring
+* P(affected) = 0.25
+
+### Sex linked
+
+#### X-linked dominant inheritance
+
+* Affects either sex, but females more frequently
+* At least one parent is affected
+* Females affected more mildly and more variably
+* Child of affected female has 50% chance of being affected (regardless of sex)
+* For an affected male, all daughters are affected, but no sons are affected
+
+#### X-linked recessive inheritance
+
+* Affects mainly males
+* Affected males born to unaffected parents
+* Mother is usually unaffected but may have affected male relatives
+* Female affected if father is affected and mother is a carrier
+* No male-male transmission
+
+#### Y-linked inheritance
+
+* Affects only males
+* Affected males have an affected father
+* All sons of affected man are affected
+
+### Special cases
+
+#### Pseudoautosomal inheritance
+
+* Indistinguishable from an autosomal dominant pedigree
+* Affected person has at least one affected parent
+* Daughters and sons equally affected
+* Transmitted by either sex
+* A mating between an affected and unaffected has a 50% chance of producing and affected offspring
+
+#### Mitochondrial inheritance
+
+* Affects both sexes
+* Inherited from an affected mother
+* Not transmitted by father to children
+* High variable clinical manifestation
+
+## Variations on Mendelian Inheritance in Humans
+
+### Incomplete Dominance
+
+### Co-dominance
+
+### Expressivity
+
+Variable expressivity refers to traits that are expressed to different degrees in different individuals.
+
+### Penetrance
+
+Penetrance refers to the proportion of organisms whose phenotype matches their genotype for a given trait.
+
+## Drawing pedigrees in R
+
+
+
+

@@ -1,0 +1,9 @@
+# (PART) Part V: Genomics {-} 
+
+# Looking at all the genes
+
+## How do we analyze thousands of genes
+
+microarrays
+sequencing
+

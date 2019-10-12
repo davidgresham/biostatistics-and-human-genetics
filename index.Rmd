@@ -1,0 +1,45 @@
+--- 
+title: "Statistics for Human Genetics"
+author: "David Gresham"
+date: "`r Sys.Date()`"
+documentclass: book
+site: bookdown::bookdown_site
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a textbook written by David Gresham the output style is bookdown::gitbook."
+---
+
+# Preface {#preface}
+
+This book is authored using **bookdown**, an R package written by Yihiu Xie.  Documentation for writing documents using bookdown is available [here](https://bookdown.org/yihui/bookdown/).  I wrote this book using [Rstudio](https://www.rstudio.com/)
+
+```{r rlogo, echo=FALSE, fig.height=0.1, fig.width=0.1}
+knitr::include_graphics("images/rlogo.png")
+```
+
+
+## Acknowledgements
+
+I would like to thank the teaching assistants Naomi Ziv, Darach Miller and Grace Avecilla who helped me develop the course upon which this book is based.  Writing this textbook was started during a sabbatical I spent at the [Harry Perkins Institute of Medical Research](https://www.perkins.org.au/) in [Perth, Australia](https://en.wikipedia.org/wiki/Perth) and was made possible by a grant from the National Science Foudation. 
+
+## About the author
+
+David Gresham is a Professor of Biology at New York Uniiversity.  He runs a [evolutionary molecular genetics laboratory](http://greshamlab.bio.nyu.edu/) at NYU [Center for Genomics and Systems Biology](http://cgsb.as.nyu.edu/page/home).  Comments and questions should be addressed to dgresham@nyu.edu.  
+
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/us/) United States License. 
+
+In order to create this book the following packages were used:
+
+```{r}
+sessionInfo()
+```
+
+To compile this book to PDF, you need XeLaTeX. <https://yihui.name/tinytex/>.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

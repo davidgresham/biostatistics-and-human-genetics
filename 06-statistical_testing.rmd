@@ -1,0 +1,22 @@
+# Statistical testing {#stat_test}
+
+The fundamental steps for all statistical testing are:
+
+1. State a null hypothesis (H0)
+2. State an alternative hypothesis (HA)
+3. Use a test statistic to determine whether our data are consistent with the null hypothesis
+4. Determine the p-value, which is an estimate of the probability of getting a test statistic that extreme, or more extreme, if the null hypothesis were true.
+
+__The p-value is the probability of getting a test statistic that large or larger if the null hypothesis is true__
+
+
+A null hypothesis says: 
++ “nothing is happening”
++ “there is no effect”
++ “there is no relationship”
++ “there is no difference”
+
+
+
+
+
